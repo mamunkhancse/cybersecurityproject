@@ -1,2 +1,2 @@
 Sign Language Detection Project
-By Sagor,Mamun,Rizwan
+By Sagor,Mamun,Rizwan,Sifat
