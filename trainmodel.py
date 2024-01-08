@@ -5,7 +5,9 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense
 from keras.callbacks import TensorBoard
 label_map = {label:num for num, label in enumerate(actions)}
-# print(label_map)
+
+
+
 sequences, labels = [], []
 for action in actions:
     for sequence in range(no_sequences):
@@ -16,9 +18,13 @@ for action in actions:
         sequences.append(window)
         labels.append(label_map[action])
 
+
+
 X = np.array(sequences)
 y = to_categorical(labels).astype(int)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
+
+
 
 log_dir = os.path.join('Logs')
 tb_callback = TensorBoard(log_dir=log_dir)
@@ -31,11 +37,15 @@ model.add(Dense(32, activation='relu'))
 model.add(Dense(actions.shape[0], activation='softmax'))
 res = [.7, 0.2, 0.1]
 
+
+
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
 model.fit(X_train, y_train, epochs=200, callbacks=[tb_callback])
 model.summary()
 
+
+
 model_json = model.to_json()
 with open("model.json", "w") as json_file:
     json_file.write(model_json)
-model.save('model.h5')
+model.save('smaple.h5')
